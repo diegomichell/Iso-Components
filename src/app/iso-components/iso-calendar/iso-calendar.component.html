@@ -1,3 +1,29 @@
-<p>
-  iso-calendar works!
-</p>
+<div class="calendar-header">
+  <ul>
+    <li *ngFor="let tag of tags">
+      <a>
+        <span [style.backgroundColor]="tag.bgColor" class="calendar-tag-icon"></span>
+        <span class="calendar-tag-title">{{tag.title}}</span>
+      </a>
+    </li>
+  </ul>
+</div>
+<h1 class="calendar-month-title">{{monthName }}, {{monthInfo.year}}</h1>
+<div class="calendar-view">
+  <table class="calendar-table">
+    <thead>
+    <tr>
+      <th *ngFor="let weekDay of weekDays">{{weekDay}}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let chunkOfDays of daysInCalendar">
+      <td class="day-view" *ngFor="let calendarDay of chunkOfDays">
+        <a [class.out-of-month]="!calendarDay.inMonth" [style.backgroundColor]="getTagBgColor(calendarDay)"
+           [style.color]="getTagTextColor(calendarDay)"
+           (click)="selectCalendarDay(calendarDay)">{{calendarDay.day}}</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
